@@ -6,7 +6,7 @@ import RegisteredUsersLinks from "./RegisteredUsersLinks";
 const NavigationBar = () => {
   return (
     <div>
-      <nav>
+      <nav className="deep-purple darken-4">
         <div class="nav-wrapper">
           <Logo />
           <NonRegisteredUsersLinks />

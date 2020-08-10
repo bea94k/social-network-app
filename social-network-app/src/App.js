@@ -2,12 +2,16 @@ import React from "react";
 import name from "./Components/Layout/NavigationBar";
 import "./App.css";
 import NavigationBar from "./Components/Layout/NavigationBar";
+import Feed from "./Components/HomePage/Feed";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App deep-purple lighten-4">
       <NavigationBar />
-      <h1>Henlo. Welcome to SoMe, yet another social media platform.</h1>
+      <h3>Henlo. Welcome to SoMe, yet another social media platform.</h3>
+      <div>
+        <Feed />
+      </div>
     </div>
   );
 }
