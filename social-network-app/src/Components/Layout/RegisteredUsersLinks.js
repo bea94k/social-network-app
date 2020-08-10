@@ -1,16 +1,15 @@
 import React from "react";
-import LogIn from "../Auth/LogIn";
-import LogOut from "../Auth/LogOut";
+import { Link } from "react-router-dom";
 
 const RegisteredUsersLinks = () => {
   return (
     <div>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
-          <LogIn />
+          <Link to="/login">Log In</Link>
         </li>
         <li>
-          <LogOut />
+          <Link to="/logout">Log Out</Link>
         </li>
       </ul>
     </div>
