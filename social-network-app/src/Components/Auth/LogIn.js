@@ -13,21 +13,23 @@ const LogIn = () => {
       </div>
       <div className="container row">
         <div className="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="input-field">
-            <input id="login-username" type="text" class="validate" />
-            <label for="login-username">Username</label>
-          </div>
-          <div class="input-field">
-            <input id="login-password" type="text" class="validate" />
-            <label for="login-password">Password</label>
-          </div>
-          <button
-            class="btn waves-effect waves-purple btn-large deep-purple"
-            type="submit"
-            name="action"
-          >
-            Log in
-          </button>
+          <form>
+            <div className="input-field">
+              <input id="login-username" type="email" className="validate" />
+              <label for="login-username">Email</label>
+            </div>
+            <div className="input-field">
+              <input id="login-password" type="password" className="validate" />
+              <label for="login-password">Password</label>
+            </div>
+            <button
+              className="btn waves-effect waves-purple btn-large deep-purple"
+              type="submit"
+              name="action"
+            >
+              Log in
+            </button>
+          </form>
         </div>
       </div>
     </div>

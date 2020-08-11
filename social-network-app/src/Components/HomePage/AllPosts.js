@@ -1,11 +1,14 @@
 import React from "react";
-import PostDetails from "../Posts/PostDetails";
+import PostSummary from "../Posts/PostSummary";
 
 const AllPosts = () => {
   return (
     <div className="col s12 m8 blue">
       <h5>All Posts:</h5>
-      <PostDetails />
+      <PostSummary />
+      <PostSummary />
+      <PostSummary />
+      <PostSummary />
     </div>
   );
 };

@@ -6,6 +6,8 @@ import Feed from "./Components/HomePage/Feed";
 import LogIn from "./Components/Auth/LogIn";
 import LogOut from "./Components/Auth/LogOut";
 import Register from "./Components/Auth/Register";
+import PostDetails from "./Components/Posts/PostDetails";
+import NewPost from "./Components/Posts/NewPost";
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
             <Route path="/login" component={LogIn} />
             <Route path="/logout" exact component={LogOut} />
             <Route path="/register" exact component={Register} />
-            {/* <Route path={"/blog/:postid"} component={Post} /> */}
+            <Route path={"/post/:id"} component={PostDetails} />
+            <Route path={"/create"} component={NewPost} />
           </Switch>
         </main>
       </div>
