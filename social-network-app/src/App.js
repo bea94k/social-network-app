@@ -17,8 +17,8 @@ function App() {
           <Switch>
             <Route path="/" exact component={Feed} />
             <Route path="/login" component={LogIn} />
-            <Route path="/logout" exact component={LogOut} />
-            <Route path="/register" exact component={Register} />
+            <Route path="/logout" component={LogOut} />
+            <Route path="/register" component={Register} />
             {/* <Route path={"/blog/:postid"} component={Post} /> */}
           </Switch>
         </main>
