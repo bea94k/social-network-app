@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Firebase from "firebase";
+import { FIREBASE_CONFIG as firebaseConfig } from "./config/firebaseConfig";
 import "./App.css";
 import NavigationBar from "./Components/Layout/NavigationBar";
 import Feed from "./Components/HomePage/Feed";
@@ -11,19 +12,7 @@ import PostDetails from "./Components/Posts/PostDetails";
 import NewPost from "./Components/Posts/NewPost";
 
 /* FIREBASE */
-// Your web app's Firebase configuration
-// Put the configuration somewhere else when releasing the app publicly (deploy or github)
-// Put the config in .gitignore or .env, or config folder (next to Components) with firebaseConfig.js
-var firebaseConfig = {
-  apiKey: "AIzaSyB5XtKJSEoc9UIVCdGvZKIm1AqJHoJYIpg",
-  authDomain: "social-network-app-98c06.firebaseapp.com",
-  databaseURL: "https://social-network-app-98c06.firebaseio.com",
-  projectId: "social-network-app-98c06",
-  storageBucket: "social-network-app-98c06.appspot.com",
-  messagingSenderId: "747303943391",
-  appId: "1:747303943391:web:91a162a21a7f1bdb363d6a",
-  measurementId: "G-ZC62MKG1PZ",
-};
+
 // Initialize Firebase
 Firebase.initializeApp(firebaseConfig);
 Firebase.analytics();
