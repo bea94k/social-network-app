@@ -1,12 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NonRegisteredUsersLinks = () => {
   return (
     <div>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" className="right">
+        {/* removed class  hide-on-med-and-down */}
         <li>
-          <Link to="/register">Register</Link>
+          <NavLink to="/login">Log In</NavLink>
+        </li>
+        <li>
+          <NavLink to="/register">Register</NavLink>
         </li>
       </ul>
     </div>

@@ -7,7 +7,7 @@ const NavigationBar = () => {
   return (
     <div className="navbar-fixed">
       <nav className="deep-purple darken-4">
-        <div class="nav-wrapper">
+        <div className="nav-wrapper">
           <Logo />
           <NonRegisteredUsersLinks />
           <RegisteredUsersLinks />
