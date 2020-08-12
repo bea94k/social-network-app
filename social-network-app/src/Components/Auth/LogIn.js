@@ -45,7 +45,7 @@ class LogIn extends React.Component {
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label for="username">Email</label>
+                <label htmlFor="username">Email</label>
               </div>
               <div className="input-field">
                 <input
@@ -54,7 +54,7 @@ class LogIn extends React.Component {
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
               </div>
               <button
                 className="btn waves-effect waves-purple btn-large deep-purple"

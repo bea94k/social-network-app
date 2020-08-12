@@ -40,14 +40,14 @@ class Register extends React.Component {
         <div className="container row">
           <div className="col s12 m8 offset-m2 l6 offset-l3">
             <form onSubmit={this.handleSubmission}>
-              <div class="input-field">
+              <div className="input-field">
                 <input
                   id="firstname"
                   type="text"
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label for="firstname">First Name</label>
+                <label htmlFor="firstname">First Name</label>
               </div>
               <div className="input-field">
                 <input
@@ -56,7 +56,7 @@ class Register extends React.Component {
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label for="lastname">Last Name</label>
+                <label htmlFor="lastname">Last Name</label>
               </div>
               <div className="input-field">
                 <input
@@ -65,7 +65,7 @@ class Register extends React.Component {
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label for="username">Email</label>
+                <label htmlFor="username">Email</label>
               </div>
               <div className="input-field">
                 <input
@@ -74,7 +74,7 @@ class Register extends React.Component {
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
               </div>
               <button
                 className="btn waves-effect waves-purple btn-large deep-purple"

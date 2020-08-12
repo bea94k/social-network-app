@@ -31,7 +31,7 @@ class NewPost extends React.Component {
           <form onSubmit={this.handleSubmission}>
             <div className="input-field">
               <input id="postTitle" type="text" onChange={this.handleChange} />
-              <label for="postTitle">Post Title:</label>
+              <label htmlFor="postTitle">Post Title:</label>
             </div>
             <div className="input-field">
               <textarea
@@ -39,10 +39,10 @@ class NewPost extends React.Component {
                 className="materialize-textarea"
                 onChange={this.handleChange}
               ></textarea>
-              <label for="postContent">Post:</label>
+              <label htmlFor="postContent">Post:</label>
             </div>
             <button
-              class="btn waves-effect waves-purple btn-large deep-purple"
+              className="btn waves-effect waves-purple btn-large deep-purple"
               type="submit"
               name="action"
             >
