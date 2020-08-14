@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    likes: 0,
+  };
+
+  addLike = () => {
+    this.setState({
+      likes: this.state.likes + 1,
+    });
+  };
+
+  substractLike = () => {
+    this.setState({
+      likes: this.state.likes - 1,
+    });
+  };
+
+  resetLikes = () => {
+    this.setState({
+      likes: 0,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <main>
+          <h2
+            className={
+              this.state.likes === 0
+                ? "likes"
+                : this.state.likes % 2 === 0
+                ? "likes even"
+                : "likes odd"
+            }
+          >
+            Total likes: {this.state.likes}{" "}
+          </h2>
+          <button onClick={this.addLike}>Add a like</button>
+          <button onClick={this.substractLike}>Substract a like</button>
+          <button onClick={this.resetLikes}>Reset likes counter</button>
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
