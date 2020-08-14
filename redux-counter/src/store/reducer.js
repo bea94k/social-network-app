@@ -58,12 +58,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         counter: 0,
       };
+    case "STORE_RESULT":
+      return {
+        ...state,
+        /* add a new item into the array with every click on "save result" */
+        results: state.results.concat({ id: new Date(), value: state.counter }),
+      };
   }
   return state;
 };
 
 const initialState = {
   counter: 0,
+  results: [],
 };
 
 export default reducer;

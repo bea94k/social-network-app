@@ -15,6 +15,14 @@ class Counter extends Component {
           Click to lose quickly (-5)!
         </button>
         <button onClick={this.props.onReset}>Click to reset!</button>
+        <div>
+          <button onClick={this.props.onStoreResult}>Save your result</button>
+        </div>
+        <ul>
+          {this.props.storedResults.map((item) => (
+            <li key={item.id}>{item.value}</li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -23,9 +31,11 @@ class Counter extends Component {
 const mapStateToProps = (state) => {
   return {
     count: state.counter,
+    storedResults: state.results,
   };
 };
 
+// actions
 const mapDispatchToProps = (dispatch) => {
   return {
     onIncCounter: () => dispatch({ type: "INCREMENT" }),
@@ -33,6 +43,8 @@ const mapDispatchToProps = (dispatch) => {
     onIncByVALUE: () => dispatch({ type: "INCREASE_BY_VALUE", value: 5 }),
     onDecrByVALUE: () => dispatch({ type: "DECREASE_BY_VALUE", value: 5 }),
     onReset: () => dispatch({ type: "RESET" }),
+    onStoreResult: () => dispatch({ type: "STORE_RESULT" }),
+    onDeleteResult: () => dispatch({ type: "DELETE_RESULT" }),
   };
 };
 
