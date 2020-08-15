@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Firebase from "firebase";
 
 class Register extends React.Component {
   constructor(props) {
@@ -24,7 +25,15 @@ class Register extends React.Component {
 
   handleSubmission = (e) => {
     e.preventDefault();
-    console.log(this.state);
+
+    Firebase.auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log("Error when trying to register new user:", err);
+      });
   };
 
   render() {

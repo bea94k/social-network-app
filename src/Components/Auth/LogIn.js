@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Firebase from "firebase";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -22,7 +23,15 @@ class LogIn extends React.Component {
 
   handleSubmission = (e) => {
     e.preventDefault();
-    console.log(this.state);
+
+    Firebase.auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        console.log("Log in successful:", this.state);
+      })
+      .catch((err) => {
+        console.log("Error when trying to log in:", err);
+      });
   };
 
   render() {
