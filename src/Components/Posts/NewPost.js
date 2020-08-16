@@ -1,4 +1,5 @@
 import React from "react";
+import Firebase from "firebase";
 
 class NewPost extends React.Component {
   constructor(props) {
@@ -22,6 +23,21 @@ class NewPost extends React.Component {
   handleSubmission = (e) => {
     e.preventDefault();
     console.log(this.state);
+    // add a new document to collection "posts"
+    Firebase.firestore()
+      .collection("posts")
+      .add({
+        title: this.state.postTitle,
+        content: this.state.postContent,
+        time: new Date(),
+        user: "where do i get the user from?",
+      })
+      .then(function (docRef) {
+        return console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((err) => {
+        console.error("Error adding document-post: ", err);
+      });
   };
 
   render() {

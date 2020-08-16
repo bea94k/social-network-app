@@ -9,6 +9,7 @@ class Register extends React.Component {
     this.state = {
       firstname: null,
       lastname: null,
+      phone: null,
       email: null,
       password: null,
     };
@@ -26,10 +27,29 @@ class Register extends React.Component {
   handleSubmission = (e) => {
     e.preventDefault();
 
+    console.log(this.state);
+
     Firebase.auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((response) => {
-        console.log(response);
+      .then((resp) => {
+        // create new user with email: resp.user.email and firstname:this.state.firstname etc.
+        // it makes sure that if the user changes some input while createUser is running, the info saved is the freshest one - except for email and password because we take them from the moment createUser started running
+        console.log(resp.user.email);
+        // Add a new document with a generated id.
+        Firebase.firestore()
+          .collection("users")
+          .add({
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            phone: this.state.phone,
+            email: resp.user.email,
+          })
+          .then(function (docRef) {
+            return console.log("Document written with ID: ", docRef.id);
+          })
+          .catch((err) => {
+            console.error("Error adding document: ", err);
+          });
       })
       .catch((err) => {
         console.log("Error when trying to register new user:", err);
@@ -66,6 +86,10 @@ class Register extends React.Component {
                   onChange={this.handleChange}
                 />
                 <label htmlFor="lastname">Last Name</label>
+              </div>
+              <div className="input-field">
+                <input id="phone" type="number" onChange={this.handleChange} />
+                <label htmlFor="phone">Phone Number</label>
               </div>
               <div className="input-field">
                 <input
