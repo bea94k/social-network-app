@@ -23,36 +23,56 @@ const db = Firebase.firestore();
 db.collection("posts")
   .get()
   .then((resp) => {
-    console.log("resp is: " + resp);
-    console.log(resp);
-    console.log("resp.docs is: " + resp.docs);
-    console.log(resp.docs);
-    console.log("resp.docs[0].data is: " + resp.docs[0].data());
+    console.log("Check if DB is connected - resp.docs[0].data is: ");
     console.log(resp.docs[0].data());
   })
   .catch((err) => {
     console.log("Error while getting the data from db:" + err);
   });
 
-function App() {
-  return (
-    <Router>
-      <div className="deep-purple lighten-4">
-        <NavigationBar />
-        <h3>Welcome to SoMe, yet another social media platform.</h3>
-        <main>
-          <Switch>
-            <Route path="/" exact component={Feed} />
-            <Route path="/login" component={LogIn} />
-            <Route path="/logout" exact component={LogOut} />
-            <Route path="/register" exact component={Register} />
-            <Route path={"/post/:id"} component={PostDetails} />
-            <Route path={"/create"} component={NewPost} />
-          </Switch>
-        </main>
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uid: null,
+    };
+  }
+
+  render() {
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user && this.state.uid === null) {
+        // user has just logged in, update the user ID
+        this.setState({
+          uid: user.uid,
+        });
+        console.log(user);
+      } else if (!user && this.state.uid !== null) {
+        // user has just logged out, clear the saved userID
+        this.setState({
+          uid: null,
+        });
+        console.log(user);
+      }
+    });
+    return (
+      <Router>
+        <div className="deep-purple lighten-4">
+          <NavigationBar uid={this.state.uid} />
+          <h3>Welcome to SoMe, yet another social media platform.</h3>
+          <main>
+            <Switch>
+              <Route path="/" exact component={Feed} />
+              <Route path="/login" component={LogIn} />
+              <Route path="/logout" exact component={LogOut} />
+              <Route path="/register" exact component={Register} />
+              <Route path={"/post/:id"} component={PostDetails} />
+              <Route path={"/create"} component={NewPost} />
+            </Switch>
+          </main>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
