@@ -23,8 +23,9 @@ const db = Firebase.firestore();
 db.collection("posts")
   .get()
   .then((resp) => {
-    console.log("Check if DB is connected - resp.docs[0].data is: ");
-    console.log(resp.docs[0].data());
+    console.log("ALL IS OKAAAAY");
+    /* console.log("Check if DB is connected - resp.docs[0].data is: ");
+    console.log(resp.docs[0].data()); */
   })
   .catch((err) => {
     console.log("Error while getting the data from db:" + err);
@@ -48,8 +49,7 @@ class App extends React.Component {
         this.setState({
           uid: user.uid,
         });
-        console.log(user);
-        console.log(this.state.uid);
+        console.log("Current user ID:", this.state.uid);
       } else if (!user && this.state.uid !== null) {
         // user has just logged out, clear the saved userID
         this.setState({

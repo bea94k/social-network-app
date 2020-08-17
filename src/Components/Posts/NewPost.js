@@ -34,8 +34,9 @@ class NewPost extends React.Component {
         time: new Date(),
         user: Firebase.auth().currentUser.uid,
       })
-      .then(function (docRef) {
-        return console.log("New post created with ID: ", docRef.id);
+      .then(() => {
+        this.setState({ posted: true });
+        console.log("New post created");
       })
       .catch((err) => {
         console.error("Error adding document-post: ", err);
@@ -45,6 +46,8 @@ class NewPost extends React.Component {
   render() {
     return (
       <div className="container row">
+        {/* if it has been posted, redirect to home/feed, if posted still false, go on with reading hte code */}
+        {this.state.posted ? <Redirect to="/" /> : ""}
         {!this.props.uid ? (
           <Redirect to="/login" />
         ) : (
