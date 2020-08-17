@@ -34,11 +34,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // crashes when currentUser is null
+      //uid: Firebase.auth.currentUser.uid,
       uid: null,
     };
   }
 
   render() {
+    // when there's a change in the user status
     Firebase.auth().onAuthStateChanged((user) => {
       if (user && this.state.uid === null) {
         // user has just logged in, update the user ID
@@ -46,6 +49,7 @@ class App extends React.Component {
           uid: user.uid,
         });
         console.log(user);
+        console.log(this.state.uid);
       } else if (!user && this.state.uid !== null) {
         // user has just logged out, clear the saved userID
         this.setState({
@@ -61,12 +65,35 @@ class App extends React.Component {
           <h3>Welcome to SoMe, yet another social media platform.</h3>
           <main>
             <Switch>
-              <Route path="/" exact component={Feed} />
-              <Route path="/login" component={LogIn} />
+              {/* render instead of component, pass uid, then in the component depending on uid render what we want for (non)logged user */}
+              <Route
+                path="/"
+                exact
+                render={() => {
+                  return <Feed uid={this.state.uid} />;
+                }}
+              />
+              <Route
+                path="/login"
+                render={() => {
+                  return <LogIn uid={this.state.uid} />;
+                }}
+              />
               <Route path="/logout" exact component={LogOut} />
-              <Route path="/register" exact component={Register} />
+              <Route
+                path="/register"
+                exact
+                render={() => {
+                  return <Register uid={this.state.uid} />;
+                }}
+              />
               <Route path={"/post/:id"} component={PostDetails} />
-              <Route path={"/create"} component={NewPost} />
+              <Route
+                path={"/create"}
+                render={() => {
+                  return <NewPost uid={this.state.uid} />;
+                }}
+              />
             </Switch>
           </main>
         </div>

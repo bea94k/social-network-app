@@ -3,7 +3,7 @@ import PostSummary from "../Posts/PostSummary";
 
 const AllPosts = () => {
   return (
-    <div className="col s12 m8 blue">
+    <div className="col s12 m8 offset-m2 blue">
       <h5>All Posts:</h5>
       <PostSummary />
       <PostSummary />

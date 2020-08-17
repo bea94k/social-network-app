@@ -1,12 +1,11 @@
 import React from "react";
 import AllPosts from "./AllPosts";
-import Notifications from "./Notifications";
+import { Redirect } from "react-router-dom";
 
-const Feed = () => {
+const Feed = (props) => {
   return (
     <div className="row">
-      <Notifications />
-      <AllPosts />
+      {props.uid ? <AllPosts /> : <Redirect to="/login" />}
     </div>
   );
 };

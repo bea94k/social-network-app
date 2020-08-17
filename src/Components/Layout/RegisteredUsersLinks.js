@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Firebase from "firebase";
 
-const onLogOut = () => {
+const logOut = () => {
   Firebase.auth()
     .signOut()
     .then(() => {
@@ -20,12 +20,12 @@ const RegisteredUsersLinks = () => {
         {/* removed class  hide-on-med-and-down */}
         <li>
           {/* <NavLink to="/logout">Log Out</NavLink> */}
-          <button
-            className="btn waves-effect waves-purple deep-purple"
-            onClick={onLogOut}
-          >
+          <NavLink to="/logout" onClick={logOut}>
             Log Out
-          </button>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/create">New Post</NavLink>
         </li>
       </ul>
     </div>
