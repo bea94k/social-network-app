@@ -11,11 +11,13 @@ class NavigationBar extends React.Component {
           <div className="nav-wrapper">
             <Logo />
             {/* if the user is logged in (uid not null), show only log out btn, if user not logged in, show register and login btns */}
-            {this.props.uid ? (
+            {/* {this.props.uid ? (
               <RegisteredUsersLinks />
             ) : (
               <NonRegisteredUsersLinks />
-            )}
+            )} */}
+            <NonRegisteredUsersLinks />
+            <RegisteredUsersLinks />
           </div>
         </nav>
       </div>
