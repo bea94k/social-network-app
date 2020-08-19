@@ -1,6 +1,7 @@
 import React from "react";
 import PostSummary from "./PostSummary";
 import { connect } from "react-redux";
+import { removePosts } from "../../store/actions/postActions";
 
 class AllPosts extends React.Component {
   render() {
@@ -34,7 +35,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removePost: () => {
-      dispatch({ type: "REMOVE_ALL_POSTS" });
+      dispatch(removePosts);
     },
   };
 };

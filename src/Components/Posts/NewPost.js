@@ -72,11 +72,8 @@ class NewPost extends React.Component {
 // is there a payload to be dispatched together with the action
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPost: (post) => {
-      return dispatch({
-        type: "CREATE_NEW_POST",
-        post: post,
-      });
+    createPost: () => {
+      return dispatch(createPost);
     },
   };
 };

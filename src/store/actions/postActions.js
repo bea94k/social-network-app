@@ -2,7 +2,7 @@ import Firebase from "firebase";
 
 //const db = Firebase.firestore();
 
-export const createPost = (post) => {
+/* export const createPost = (post) => {
   return (dispatch) => {
     Firebase.firestore()
       .collection("posts")
@@ -14,4 +14,12 @@ export const createPost = (post) => {
         dispatch({ type: "CREATE_POST_ERROR" }, err);
       });
   };
+}; */
+
+export const removePosts = () => {
+  return { type: "REMOVE_ALL_POSTS" };
+};
+
+export const createPost = (post) => {
+  return { type: "CREATE_NEW_POST", post: post };
 };
