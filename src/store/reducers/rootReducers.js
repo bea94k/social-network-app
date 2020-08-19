@@ -48,6 +48,11 @@ const rootReducers = (state = initialState, action) => {
         ...state,
         posts: [...state.posts, action.post],
       };
+    case "REMOVE_ALL_POSTS":
+      return {
+        ...state,
+        posts: [],
+      };
     default:
       return state;
   }

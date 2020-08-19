@@ -8,6 +8,9 @@ class AllPosts extends React.Component {
     console.log(this.props.posts);
     return (
       <div className="col s12 m8 offset-m2 blue">
+        <button className="btn" onClick={this.props.removePost}>
+          Remove all posts
+        </button>
         <h5>All Posts:</h5>
         {this.props.posts ? (
           this.props.posts.map((post) => (
@@ -28,4 +31,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AllPosts);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removePost: () => {
+      dispatch({ type: "REMOVE_ALL_POSTS" });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllPosts);
