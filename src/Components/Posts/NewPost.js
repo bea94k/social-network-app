@@ -60,14 +60,26 @@ class NewPost extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+// pass a part of the state (from Redux store) to this component as props under the name of posts (props.posts)
+/* const mapStateToProps = (state) => {
   return {};
-};
+}; */
 
+// put the dispatched action in the component props (under a name, here props.createPost)
+
+//when to dispatch the action
+// what is the name of the props to be called so that the action is dispatched
+// is there a payload to be dispatched together with the action
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPost: (post) => dispatch(createPost(post)),
+    createPost: (post) => {
+      return dispatch({
+        type: "CREATE_NEW_POST",
+        post: post,
+      });
+    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
+// since mapStateToProps is empty, not used, not needed, "skip" it with null and pass just mapDispatch
+export default connect(/* mapStateToProps */ null, mapDispatchToProps)(NewPost);

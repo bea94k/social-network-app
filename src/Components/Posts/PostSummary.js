@@ -6,9 +6,9 @@ class PostSummary extends React.Component {
       <div className="card">
         <div className="card-content">
           <span className="card-title">{this.props.postData.title}</span>
-          <p>By: {this.props.postData.user}</p>
+          {/* <p>By: {this.props.postData.user}</p> */}
           <p>{this.props.postData.content}</p>
-          <p>{this.props.postData.time.toString()}</p>
+          {/* <p>{this.props.postData.time.toString()}</p> */}
         </div>
       </div>
     );
