@@ -13,26 +13,8 @@ import Register from "./Components/Auth/Register";
 import PostDetails from "./Components/Posts/PostDetails";
 import NewPost from "./Components/Posts/NewPost";
 
-/* FIREBASE */
-
 // Initialize Firebase
 Firebase.initializeApp(firebaseConfig);
-Firebase.analytics();
-
-// telling the app to use the database of Firestore
-const db = Firebase.firestore();
-
-// which collection you want to access, method - returns a promise
-db.collection("posts")
-  .get()
-  .then((resp) => {
-    console.log("ALL IS OKAAAAY");
-    /* console.log("Check if DB is connected - resp.docs[0].data is: ");
-    console.log(resp.docs[0].data()); */
-  })
-  .catch((err) => {
-    console.log("Error while getting the data from db:" + err);
-  });
 
 function App() {
   return (

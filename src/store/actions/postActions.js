@@ -23,5 +23,17 @@ export const removePosts = () => {
 };
 
 export const createPost = (post) => {
-  return { type: "CREATE_NEW_POST", post: post };
+  return (dispatch, getState, storeEnhancers) => {
+    /* storeEnhanceers is {getFirestore(), getFirebase()}, as marked in indexx.js in applyMiddleware(thunk.withExtraArgument) */
+    storeEnhancers
+      .getFirestore()
+      .collection("posts")
+      .add(post)
+      .then((resp) => {
+        dispatch({ type: "CREATE_NEW_POST" });
+      })
+      .catch((err) => {
+        dispatch({ type: "CREATE_NEW_POST_FAILED", error: err });
+      });
+  };
 };
