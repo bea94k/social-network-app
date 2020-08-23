@@ -16,6 +16,8 @@ import Firebase from "firebase";
   };
 }; */
 
+/* ACTION CREATORS */
+
 export const removePosts = () => {
   return { type: "REMOVE_ALL_POSTS" };
 };

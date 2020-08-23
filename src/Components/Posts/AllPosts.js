@@ -13,7 +13,7 @@ class AllPosts extends React.Component {
           Remove all posts
         </button>
         <h5>All Posts:</h5>
-        {this.props.posts ? (
+        {this.props.posts.length > 0 ? (
           this.props.posts.map((post) => (
             <PostSummary postData={post} key={post.id} />
           ))
@@ -34,9 +34,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removePost: () => {
-      dispatch(removePosts);
-    },
+    removePost: () => dispatch(removePosts()),
   };
 };
 
