@@ -2,8 +2,12 @@ import React from "react";
 import PostSummary from "./PostSummary";
 import { connect } from "react-redux";
 import { removePosts } from "../../store/actions/postActions";
+import { getAllPosts } from "../../store/actions/postActions";
 
 class AllPosts extends React.Component {
+  componentDidMount() {
+    this.props.getAllPosts();
+  }
   render() {
     console.log("Received state from reducer");
     console.log(this.props.posts);
@@ -15,7 +19,7 @@ class AllPosts extends React.Component {
         <h5>All Posts:</h5>
         {this.props.posts.length > 0 ? (
           this.props.posts.map((post) => (
-            <PostSummary postData={post} key={post.id} />
+            <PostSummary postData={post.data()} key={post.id} />
           ))
         ) : (
           <h5>Loading...</h5>
@@ -35,6 +39,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removePost: () => dispatch(removePosts()),
+    getAllPosts: () => dispatch(getAllPosts()),
   };
 };
 

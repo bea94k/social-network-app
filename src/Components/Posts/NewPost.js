@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createPost } from "../../store/actions/postActions";
+import { Redirect } from "react-router-dom";
 
 class NewPost extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class NewPost extends React.Component {
     this.state = {
       postTitle: null,
       postContent: null,
+      posted: false,
     };
 
     this.handleSubmission = this.handleSubmission.bind(this);
@@ -27,11 +29,14 @@ class NewPost extends React.Component {
       title: this.state.postTitle,
       content: this.state.postContent,
     });
+    this.setState({ posted: true });
   };
 
   render() {
     return (
       <div className="container row">
+        {/* after the post is submitted, state.posted changed to true, redirect to feed; if not posted, continue to render new post form */}
+        {this.state.posted ? <Redirect to="/" /> : ""}
         <div className="col s12 m8 offset-m2 l6 offset-l3">
           <form onSubmit={this.handleSubmission}>
             <div className="input-field">
