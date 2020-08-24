@@ -13,11 +13,37 @@ const rootReducers = (state = initialState, action) => {
         posts: action.postsArray,
       };
 
+    case "GET_ALL_POSTS_FAILED":
+      console.log("An error has occured: " + action.err);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
+      };
+
     case "CREATE_NEW_POST":
       console.log("A new post has been added to the Firestore.");
       return state;
 
     case "CREATE_NEW_POST_FAILED":
+      console.log("An error has occured: " + action.err);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
+      };
+
+    case "DELETE_POST":
+      console.log("Deleted post ID: " + action.deletedPostID);
+      let updatedPostArray = state.posts.filter(
+        (item) => item.id !== action.deletedPostID
+      );
+      return {
+        ...state,
+        posts: updatedPostArray,
+      };
+
+    case "DELETE_POST_FAILED":
       console.log("An error has occured: " + action.err);
       return {
         ...state,

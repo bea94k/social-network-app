@@ -9,17 +9,23 @@ class AllPosts extends React.Component {
     this.props.getAllPosts();
   }
   render() {
-    console.log("Received state from reducer");
-    console.log(this.props.posts);
     return (
       <div className="col s12 m8 offset-m2 blue">
-        <button className="btn" onClick={this.props.removePost}>
+        <p>
+          The button below removes all posts from store, but not from database -
+          they appear again after re-rendering the feed component
+        </p>
+        <button className="btn" onClick={this.props.removePosts}>
           Remove all posts
         </button>
         <h5>All Posts:</h5>
         {this.props.posts.length > 0 ? (
           this.props.posts.map((post) => (
-            <PostSummary postData={post.data()} key={post.id} />
+            <PostSummary
+              postData={post.data()}
+              key={post.id}
+              postID={post.id}
+            />
           ))
         ) : (
           <h5>Loading...</h5>
@@ -38,7 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removePost: () => dispatch(removePosts()),
+    removePosts: () => dispatch(removePosts()),
     getAllPosts: () => dispatch(getAllPosts()),
   };
 };

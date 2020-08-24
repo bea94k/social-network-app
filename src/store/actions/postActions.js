@@ -11,8 +11,7 @@ export const getAllPosts = () => {
         dispatch({ type: "GET_ALL_POSTS", postsArray: resp.docs });
       })
       .catch((err) => {
-        console.log("error when getting all posts: ", err);
-        //dispatch({ type: "CREATE_NEW_POST_FAILED", error: err });
+        dispatch({ type: "GET_ALL_POSTS_FAILED", error: err });
       });
   };
 };
@@ -29,6 +28,24 @@ export const createPost = (post) => {
       })
       .catch((err) => {
         dispatch({ type: "CREATE_NEW_POST_FAILED", error: err });
+      });
+  };
+};
+
+export const deletePost = (postId) => {
+  return (dispatch, getState, storeEnhancers) => {
+    /* storeEnhanceers is {getFirestore(), getFirebase()}, as marked in index.js in applyMiddleware(thunk.withExtraArgument) */
+    storeEnhancers
+      .getFirestore()
+      .collection("posts")
+      .doc(postId)
+      .delete()
+      .then((resp) => {
+        console.log(resp);
+        dispatch({ type: "DELETE_POST", deletedPostID: postId });
+      })
+      .catch((err) => {
+        dispatch({ type: "DELETE_POST_FAILED", error: err });
       });
   };
 };
