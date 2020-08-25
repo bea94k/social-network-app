@@ -14,7 +14,7 @@ const rootReducers = (state = initialState, action) => {
       };
 
     case "GET_ALL_POSTS_FAILED":
-      console.log("An error has occured: " + action.err);
+      console.log("An error has occured: " + action.error);
       return {
         ...state,
         userActionErr: action.error,
@@ -26,7 +26,7 @@ const rootReducers = (state = initialState, action) => {
       return state;
 
     case "CREATE_NEW_POST_FAILED":
-      console.log("An error has occured: " + action.err);
+      console.log("An error has occured: " + action.error);
       return {
         ...state,
         userActionErr: action.error,
@@ -44,7 +44,7 @@ const rootReducers = (state = initialState, action) => {
       };
 
     case "DELETE_POST_FAILED":
-      console.log("An error has occured: " + action.err);
+      console.log("An error has occured: " + action.error);
       return {
         ...state,
         userActionErr: action.error,
@@ -55,6 +55,25 @@ const rootReducers = (state = initialState, action) => {
       return {
         ...state,
         posts: [],
+      };
+
+    case "LOG_IN_SUCCESS":
+      console.log("User logged in: ");
+      console.log(action.userData.email);
+      console.log(action.userData.firstname);
+      console.log(action.userData.lastname);
+      console.log(action.userData.phone);
+      return {
+        ...state,
+        userData: action.userData,
+      };
+
+    case "LOG_IN_FAILED":
+      console.log("An error has occured: " + action.error);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
       };
 
     default:

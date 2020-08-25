@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Firebase from "firebase";
+import { connect } from "react-redux";
+import { logUserIn } from "../../store/actions/authActions";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -23,15 +24,10 @@ class LogIn extends React.Component {
 
   handleSubmission = (e) => {
     e.preventDefault();
-
-    Firebase.auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        console.log("Log in successful:", this.state);
-      })
-      .catch((err) => {
-        console.log("Error when trying to log in:", err);
-      });
+    this.props.logIn({
+      email: this.state.email,
+      password: this.state.password,
+    });
   };
 
   render() {
@@ -80,4 +76,15 @@ class LogIn extends React.Component {
   }
 }
 
-export default LogIn;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logIn: (user) => dispatch(logUserIn(user)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LogIn);
+
+connect(
+  // Map redux state to component props
+  ({ firebase: { auth, profile } }) => ({ auth, profile })
+);
