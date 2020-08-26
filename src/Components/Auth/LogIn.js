@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logUserIn } from "../../store/actions/authActions";
 
@@ -32,49 +32,61 @@ class LogIn extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="center">
-          <h5>Log In</h5>
-          <p>
-            If you don't have an account yet,{" "}
-            <Link to="/register">register here</Link>.
-          </p>
-        </div>
-        <div className="container row">
-          <div className="col s12 m8 offset-m2 l6 offset-l3">
-            <form onSubmit={this.handleSubmission}>
-              <div className="input-field">
-                <input
-                  id="email"
-                  type="email"
-                  className="validate"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="username">Email</label>
+      <>
+        {this.props.user.uid ? (
+          <Redirect to="/" />
+        ) : (
+          <div>
+            <div className="center">
+              <h5>Log In</h5>
+              <p>
+                If you don't have an account yet,{" "}
+                <Link to="/register">register here</Link>.
+              </p>
+            </div>
+            <div className="container row">
+              <div className="col s12 m8 offset-m2 l6 offset-l3">
+                <form onSubmit={this.handleSubmission}>
+                  <div className="input-field">
+                    <input
+                      id="email"
+                      type="email"
+                      className="validate"
+                      onChange={this.handleChange}
+                    />
+                    <label htmlFor="username">Email</label>
+                  </div>
+                  <div className="input-field">
+                    <input
+                      id="password"
+                      type="password"
+                      className="validate"
+                      onChange={this.handleChange}
+                    />
+                    <label htmlFor="password">Password</label>
+                  </div>
+                  <button
+                    className="btn waves-effect waves-purple btn-large deep-purple"
+                    type="submit"
+                    name="action"
+                  >
+                    Log in
+                  </button>
+                </form>
               </div>
-              <div className="input-field">
-                <input
-                  id="password"
-                  type="password"
-                  className="validate"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-              <button
-                className="btn waves-effect waves-purple btn-large deep-purple"
-                type="submit"
-                name="action"
-              >
-                Log in
-              </button>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userData,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -82,9 +94,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(LogIn);
-
-connect(
-  // Map redux state to component props
-  ({ firebase: { auth, profile } }) => ({ auth, profile })
-);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

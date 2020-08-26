@@ -8,7 +8,6 @@ export const logUserIn = (user) => {
       .signInWithEmailAndPassword(user.email, user.password)
       .then((resp) => {
         console.log("Trying to get user's data based on the email");
-        console.log(resp.user);
         storeEnhancers
           .getFirestore()
           .collection("users")
@@ -16,8 +15,16 @@ export const logUserIn = (user) => {
           .get()
           .then((doc) => {
             if (doc.exists) {
-              console.log("Document data:", doc.data());
-              dispatch({ type: "LOG_IN_SUCCESS", userData: doc.data() });
+              dispatch({
+                type: "LOG_IN_SUCCESS",
+                userData: {
+                  uid: doc.id,
+                  email: doc.data().email,
+                  firstname: doc.data().firstname,
+                  lastname: doc.data().lastname,
+                  phone: doc.data().phone,
+                },
+              });
             } else {
               // doc.data() will be undefined in this case
               console.log(

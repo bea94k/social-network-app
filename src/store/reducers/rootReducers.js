@@ -58,11 +58,6 @@ const rootReducers = (state = initialState, action) => {
       };
 
     case "LOG_IN_SUCCESS":
-      console.log("User logged in: ");
-      console.log(action.userData.email);
-      console.log(action.userData.firstname);
-      console.log(action.userData.lastname);
-      console.log(action.userData.phone);
       return {
         ...state,
         userData: action.userData,
