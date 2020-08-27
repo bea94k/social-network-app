@@ -1,10 +1,35 @@
+import { combineReducers } from "redux";
+import { firebaseReducer } from "react-redux-firebase";
+
 const initialState = {
   posts: [],
   userData: {},
+  userLoggedIn: false,
   userActionErr: null,
 };
 
-const rootReducers = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "LOG_IN_SUCCESS":
+      return {
+        ...state,
+        userData: action.userData,
+      };
+
+    case "LOG_IN_FAILED":
+      console.log("An error has occured: " + action.error);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
+      };
+
+    default:
+      return state;
+  }
+};
+
+const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_ALL_POSTS":
       console.log("Getting all posts from the Firestore...");
@@ -57,23 +82,15 @@ const rootReducers = (state = initialState, action) => {
         posts: [],
       };
 
-    case "LOG_IN_SUCCESS":
-      return {
-        ...state,
-        userData: action.userData,
-      };
-
-    case "LOG_IN_FAILED":
-      console.log("An error has occured: " + action.error);
-      return {
-        ...state,
-        userActionErr: action.error,
-        // or is it action.error.message ?
-      };
-
     default:
       return state;
   }
 };
+
+const rootReducers = combineReducers({
+  auth: authReducer,
+  posts: postReducer,
+  firebase: firebaseReducer,
+});
 
 export default rootReducers;

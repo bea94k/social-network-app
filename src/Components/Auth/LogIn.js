@@ -24,10 +24,7 @@ class LogIn extends React.Component {
 
   handleSubmission = (e) => {
     e.preventDefault();
-    this.props.logIn({
-      email: this.state.email,
-      password: this.state.password,
-    });
+    this.props.logIn(this.state);
   };
 
   render() {
@@ -84,7 +81,11 @@ class LogIn extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.userData,
+    /* check the user ID - if null, user not logged in */
+    user: state.auth.userData,
+    /* loginStatus: !state.firebase.auth.isEmpty */
+    /* isEmpty true means user not logged in = userLoggedIn: false,
+    isEmpty true = userLoggedIn false, so to get if the user is logged in, we have to turn the isEmpty around */
   };
 };
 

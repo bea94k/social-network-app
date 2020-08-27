@@ -38,7 +38,7 @@ class AllPosts extends React.Component {
 // pass a part of the state (from Redux store) to this component as props under the name of posts (props.posts)
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts,
+    posts: state.posts.posts,
   };
 };
 
