@@ -14,6 +14,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: action.userData,
+        userLoggedIn: true,
       };
 
     case "LOG_IN_FAILED":
@@ -22,6 +23,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         userActionErr: action.error,
         // or is it action.error.message ?
+      };
+
+    case "LOG_OUT_SUCCESS":
+      return {
+        ...state,
+        userLoggedIn: false,
+        userData: {},
       };
 
     default:

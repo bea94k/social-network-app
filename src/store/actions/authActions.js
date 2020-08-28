@@ -38,3 +38,21 @@ export const logUserIn = (user) => {
       });
   };
 };
+
+export const logUserOut = () => {
+  return (dispatch, getState, storeEnhancers) => {
+    storeEnhancers
+      .getFirebase()
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({
+          type: "LOG_OUT_SUCCESS",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        /* dispatch({ type: "LOG_IN_FAILED", error: err }); */
+      });
+  };
+};
