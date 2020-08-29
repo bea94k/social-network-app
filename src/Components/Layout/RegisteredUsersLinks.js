@@ -26,17 +26,10 @@ class RegisteredUsersLinks extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { user: state.auth.userData };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     logOut: () => dispatch(logUserOut()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RegisteredUsersLinks);
+export default connect(null, mapDispatchToProps)(RegisteredUsersLinks);

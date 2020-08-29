@@ -7,7 +7,6 @@ export const logUserIn = (user) => {
       .auth()
       .signInWithEmailAndPassword(user.email, user.password)
       .then((resp) => {
-        console.log("Trying to get user's data based on the email");
         storeEnhancers
           .getFirestore()
           .collection("users")

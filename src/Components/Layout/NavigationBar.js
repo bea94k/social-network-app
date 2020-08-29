@@ -26,7 +26,9 @@ class NavigationBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { userLoggedIn: state.auth.userLoggedIn };
+  return {
+    userLoggedIn: state.auth.userLoggedIn,
+  };
 };
 
 export default connect(mapStateToProps)(NavigationBar);

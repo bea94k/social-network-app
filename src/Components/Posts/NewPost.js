@@ -34,52 +34,55 @@ class NewPost extends React.Component {
 
   render() {
     return (
-      <div className="container row">
-        {/* after the post is submitted, state.posted changed to true, redirect to feed; if not posted, continue to render new post form */}
-        {this.state.posted ? <Redirect to="/" /> : ""}
-        <div className="col s12 m8 offset-m2 l6 offset-l3">
-          <form onSubmit={this.handleSubmission}>
-            <div className="input-field">
-              <input id="postTitle" type="text" onChange={this.handleChange} />
-              <label htmlFor="postTitle">Post Title:</label>
+      <>
+        {this.props.userLoggedIn ? (
+          <div className="container row">
+            {/* after the post is submitted, state.posted changed to true, redirect to feed; if not posted, continue to render new post form */}
+            {this.state.posted ? <Redirect to="/" /> : ""}
+            <div className="col s12 m8 offset-m2 l6 offset-l3">
+              <form onSubmit={this.handleSubmission}>
+                <div className="input-field">
+                  <input
+                    id="postTitle"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                  <label htmlFor="postTitle">Post Title:</label>
+                </div>
+                <div className="input-field">
+                  <textarea
+                    id="postContent"
+                    className="materialize-textarea"
+                    onChange={this.handleChange}
+                  ></textarea>
+                  <label htmlFor="postContent">Post:</label>
+                </div>
+                <button
+                  className="btn waves-effect waves-purple btn-large deep-purple"
+                  type="submit"
+                  name="action"
+                >
+                  Submit
+                </button>
+              </form>
             </div>
-            <div className="input-field">
-              <textarea
-                id="postContent"
-                className="materialize-textarea"
-                onChange={this.handleChange}
-              ></textarea>
-              <label htmlFor="postContent">Post:</label>
-            </div>
-            <button
-              className="btn waves-effect waves-purple btn-large deep-purple"
-              type="submit"
-              name="action"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
+          </div>
+        ) : (
+          <Redirect to="/login" />
+        )}
+      </>
     );
   }
 }
 
-// pass a part of the state (from Redux store) to this component as props under the name of posts (props.posts)
-/* const mapStateToProps = (state) => {
-  return {};
-}; */
+const mapStateToProps = (state) => {
+  return { userLoggedIn: state.auth.userLoggedIn };
+};
 
-// put the dispatched action in the component props (under a name, here props.createPost)
-
-//when to dispatch the action
-// what is the name of the props to be called so that the action is dispatched
-// is there a payload to be dispatched together with the action
 const mapDispatchToProps = (dispatch) => {
   return {
     createPost: (post) => dispatch(createPost(post)),
   };
 };
 
-// since mapStateToProps is empty, not used, not needed, "skip" it with null and pass just mapDispatch
-export default connect(/* mapStateToProps */ null, mapDispatchToProps)(NewPost);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
