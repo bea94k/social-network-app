@@ -40,8 +40,7 @@ export const deletePost = (postId) => {
       .collection("posts")
       .doc(postId)
       .delete()
-      .then((resp) => {
-        console.log(resp);
+      .then(() => {
         dispatch({ type: "DELETE_POST", deletedPostID: postId });
       })
       .catch((err) => {

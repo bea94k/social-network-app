@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import Firebase from "firebase";
 import { connect } from "react-redux";
+import { registerNewUser } from "../../store/actions/authActions";
 
 class Register extends React.Component {
   constructor(props) {
@@ -28,28 +28,7 @@ class Register extends React.Component {
   handleSubmission = (e) => {
     e.preventDefault();
 
-    console.log(this.state);
-
-    Firebase.auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((resp) => {
-        // create new user with email: resp.user.email and firstname:this.state.firstname etc.
-        // it makes sure that if the user changes some input while createUser is running, the info saved is the freshest one - except for email and password because we take them from the moment createUser started running
-        console.log(resp.user.email);
-        // from the response we can get the user's ID (ID of the document created when registering)
-        console.log(resp.user.uid);
-        // Add a new document with a generated id.
-        Firebase.firestore().collection("users").doc(resp.user.uid).set({
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          phone: this.state.phone,
-          email: resp.user.email,
-        });
-        console.log("New user account created.");
-      })
-      .catch((err) => {
-        console.log("Error when creating new user account:", err);
-      });
+    this.props.registerUser(this.state);
   };
 
   render() {
@@ -134,4 +113,10 @@ const mapStateToProps = (state) => {
   return { userLoggedIn: state.auth.userLoggedIn };
 };
 
-export default connect(mapStateToProps)(Register);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerUser: (userInfo) => dispatch(registerNewUser(userInfo)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

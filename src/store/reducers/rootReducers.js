@@ -18,7 +18,15 @@ const authReducer = (state = initialState, action) => {
       };
 
     case "LOG_IN_FAILED":
-      console.log("An error has occured: " + action.error);
+      console.log("An error has occured when logging in: " + action.error);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
+      };
+
+    case "REGISTRATION_FAILED":
+      console.log("An error has occured when registering: " + action.error);
       return {
         ...state,
         userActionErr: action.error,
@@ -54,7 +62,6 @@ const postReducer = (state = initialState, action) => {
       };
 
     case "CREATE_NEW_POST":
-      console.log("A new post has been added to the Firestore.");
       return state;
 
     case "CREATE_NEW_POST_FAILED":
@@ -66,7 +73,6 @@ const postReducer = (state = initialState, action) => {
       };
 
     case "DELETE_POST":
-      console.log("Deleted post ID: " + action.deletedPostID);
       let updatedPostArray = state.posts.filter(
         (item) => item.id !== action.deletedPostID
       );

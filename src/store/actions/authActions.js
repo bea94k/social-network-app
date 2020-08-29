@@ -38,6 +38,42 @@ export const logUserIn = (user) => {
   };
 };
 
+export const registerNewUser = (userInfo) => {
+  return (dispatch, getState, storeEnhancers) => {
+    storeEnhancers
+      .getFirebase()
+      .auth()
+      .createUserWithEmailAndPassword(userInfo.email, userInfo.password)
+      .then((resp) => {
+        storeEnhancers
+          .getFirestore()
+          .collection("users")
+          .doc(resp.user.uid)
+          .set({
+            firstname: userInfo.firstname,
+            lastname: userInfo.lastname,
+            phone: +userInfo.phone,
+            email: resp.user.email,
+          });
+        // after successfully registering in Firebase and saving user's details to Firestore, log user in
+        // can't be in separate .then() cause I need uID from resp after creating new user
+        dispatch({
+          type: "LOG_IN_SUCCESS",
+          userData: {
+            uid: resp.user.id,
+            firstname: userInfo.firstname,
+            lastname: userInfo.lastname,
+            phone: +userInfo.phone,
+            email: resp.user.email,
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({ type: "REGISTRATION_FAILED", error: err });
+      });
+  };
+};
+
 export const logUserOut = () => {
   return (dispatch, getState, storeEnhancers) => {
     storeEnhancers
