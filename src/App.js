@@ -29,7 +29,7 @@ function App() {
             <Route exact path="/register" component={Register}></Route>
             <Route exact path="/login" component={LogIn}></Route>
             <Route exact path="/logout" component={LogOut}></Route>
-            <Route exact path="/post/:id" component={PostDetails}></Route>
+            <Route path="/post/:postId" component={PostDetails}></Route>
           </Switch>
         </main>
       </div>

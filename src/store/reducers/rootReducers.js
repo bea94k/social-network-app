@@ -3,6 +3,7 @@ import { firebaseReducer } from "react-redux-firebase";
 
 const initialState = {
   posts: [],
+  singlePost: {},
   userData: {},
   userLoggedIn: false,
   userActionErr: null,
@@ -54,6 +55,20 @@ const postReducer = (state = initialState, action) => {
       };
 
     case "GET_ALL_POSTS_FAILED":
+      console.log("An error has occured: " + action.error);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
+      };
+
+    case "GET_POST_BY_ID":
+      return {
+        ...state,
+        singlePost: action.postData,
+      };
+
+    case "GET_POST_BY_ID_FAILED":
       console.log("An error has occured: " + action.error);
       return {
         ...state,

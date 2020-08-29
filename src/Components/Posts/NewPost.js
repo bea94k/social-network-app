@@ -28,6 +28,9 @@ class NewPost extends React.Component {
     this.props.createPost({
       title: this.state.postTitle,
       content: this.state.postContent,
+      authorFirstname: this.props.user.firstname,
+      authorLastname: this.props.user.lastname,
+      date: new Date(),
     });
     this.setState({ posted: true });
   };
@@ -76,7 +79,7 @@ class NewPost extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { userLoggedIn: state.auth.userLoggedIn };
+  return { userLoggedIn: state.auth.userLoggedIn, user: state.auth.userData };
 };
 
 const mapDispatchToProps = (dispatch) => {

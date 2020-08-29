@@ -16,6 +16,23 @@ export const getAllPosts = () => {
   };
 };
 
+export const getPostByID = (postID) => {
+  return (dispatch, getState, storeEnhancers) => {
+    /* storeEnhanceers is {getFirestore(), getFirebase()}, as marked in index.js in applyMiddleware(thunk.withExtraArgument) */
+    storeEnhancers
+      .getFirestore()
+      .collection("posts")
+      .doc(postID)
+      .get()
+      .then((resp) => {
+        dispatch({ type: "GET_POST_BY_ID", postData: resp.data() });
+      })
+      .catch((err) => {
+        dispatch({ type: "GET_POST_BY_ID_FAILED", error: err });
+      });
+  };
+};
+
 export const createPost = (post) => {
   return (dispatch, getState, storeEnhancers) => {
     /* storeEnhanceers is {getFirestore(), getFirebase()}, as marked in index.js in applyMiddleware(thunk.withExtraArgument) */
