@@ -5,10 +5,6 @@ import { deletePost } from "../../store/actions/postActions";
 import moment from "moment";
 
 class PostSummary extends React.Component {
-  clickingTest = () => {
-    console.log("it was clicked");
-  };
-
   render() {
     return (
       <div className="card">

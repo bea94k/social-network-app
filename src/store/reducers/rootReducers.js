@@ -52,6 +52,7 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: action.postsArray,
+        singlePost: {},
       };
 
     case "GET_ALL_POSTS_FAILED":

@@ -21,9 +21,7 @@ class PostDetails extends React.Component {
             </Link>
 
             <div className="container">
-              {/* displays empty card instead of Loading... when correct ID and waits for the data - WHY?! */}
-              {this.props.foundPost == undefined ||
-              this.props.foundPost === {} ? (
+              {!this.props.foundPost.hasOwnProperty("title") ? (
                 <h1>Loading...</h1>
               ) : (
                 <div className="card">
@@ -33,12 +31,11 @@ class PostDetails extends React.Component {
                       By {this.props.foundPost.authorFirstname}{" "}
                       {this.props.foundPost.authorLastname}
                     </p>
-                    {/* can't read seconds of undefined - it is not undefined! */}
-                    {/* <p>
-                  {moment
-                    .unix(this.props.foundPost.date.seconds)
-                    .format("Do MMM YYYY, h:mm a")}
-                </p> */}
+                    <p>
+                      {moment
+                        .unix(this.props.foundPost.date.seconds)
+                        .format("Do MMM YYYY, h:mm a")}
+                    </p>
                     <h5>{this.props.foundPost.content}</h5>
                   </div>
                 </div>
