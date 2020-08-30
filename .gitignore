@@ -23,5 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #firebase config
-
 firebaseConfig*
+
+#firebase hosting
+/.firebase
