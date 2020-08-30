@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import rootReducers from "./store/reducers/rootReducers";
@@ -18,9 +17,9 @@ import { FIREBASE_CONFIG as firebaseConfig } from "./config/firebaseConfig";
 
 const store = createStore(
   rootReducers,
-  /* store enhancers, meaning more features of the store */
+  // store enhancers, meaning more features of the store
   compose(
-    /* compose combines several enhancers into one */
+    // compose combines several enhancers into one
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
     reduxFirestore(firebase, firebaseConfig)
   )
@@ -41,8 +40,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

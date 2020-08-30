@@ -8,7 +8,7 @@ const LogOut = () => {
         <h5>You've been successfully logged out.</h5>
         <p>
           Unless you just entered the url. In that case, you just see this page,
-          but the log out function was not triggered. Still logged in.
+          but the log out function was not triggered.
         </p>
         <Link to="/login" className="btn waves-effect waves-purple deep-purple">
           Log back in

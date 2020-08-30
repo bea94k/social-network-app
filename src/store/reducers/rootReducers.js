@@ -41,6 +41,14 @@ const authReducer = (state = initialState, action) => {
         userData: {},
       };
 
+    case "LOG_OUT_FAILED":
+      console.log("An error has occured when logging in: " + action.error);
+      return {
+        ...state,
+        userActionErr: action.error,
+        // or is it action.error.message ?
+      };
+
     default:
       return state;
   }

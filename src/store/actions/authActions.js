@@ -55,7 +55,7 @@ export const registerNewUser = (userInfo) => {
             phone: +userInfo.phone,
             email: resp.user.email,
           });
-        // after successfully registering in Firebase and saving user's details to Firestore, log user in
+        // after successfully registering in Firebase and saving user's details to Firestore, log user in with LOG_IN action
         // can't be in separate .then() cause I need uID from resp after creating new user
         dispatch({
           type: "LOG_IN_SUCCESS",
@@ -86,8 +86,7 @@ export const logUserOut = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
-        /* dispatch({ type: "LOG_IN_FAILED", error: err }); */
+        dispatch({ type: "LOG_OUT_FAILED", error: err });
       });
   };
 };

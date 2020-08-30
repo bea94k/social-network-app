@@ -5,7 +5,6 @@ const NonRegisteredUsersLinks = () => {
   return (
     <div>
       <ul id="nav-mobile" className="right">
-        {/* removed class  hide-on-med-and-down */}
         <li>
           <NavLink to="/login">Log In</NavLink>
         </li>

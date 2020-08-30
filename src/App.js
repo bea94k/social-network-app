@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Firebase from "firebase";
 import { FIREBASE_CONFIG as firebaseConfig } from "./config/firebaseConfig";
 
-/* components and css */
+// components and css
 import "./App.css";
 import NavigationBar from "./Components/Layout/NavigationBar";
 import Feed from "./Components/HomePage/Feed";

@@ -8,7 +8,6 @@ class RegisteredUsersLinks extends React.Component {
     return (
       <div>
         <ul id="nav-mobile" className="right">
-          {/* removed class  hide-on-med-and-down */}
           <li>
             <NavLink to="/">Feed</NavLink>
           </li>
