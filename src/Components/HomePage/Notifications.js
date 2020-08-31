@@ -24,7 +24,7 @@ class Notifications extends React.Component {
             notification.authorLastname === this.props.user.lastname &&
             notification.authorFirstname === this.props.user.firstname
           ) {
-            return;
+            return null;
           } else {
             return (
               <div className="card" key={notification.date.seconds}>

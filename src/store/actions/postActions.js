@@ -77,6 +77,7 @@ export const subscribeToChanges = () => {
       .collection("posts")
       .onSnapshot((changes) => {
         changes.docChanges().forEach((change) => {
+          console.log(change);
           if (change.type === "added") {
             dispatch({
               type: "OBSERVED_POST_ADDED",
