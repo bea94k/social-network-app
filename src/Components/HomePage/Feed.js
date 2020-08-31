@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import AllPosts from "../Posts/AllPosts";
 import Notifications from "./Notifications";
 
-/* class Feed extends React.Component {
+class Feed extends React.Component {
   render() {
     return (
       <>
@@ -19,9 +19,9 @@ import Notifications from "./Notifications";
       </>
     );
   }
-} */
+}
 
-class Feed extends React.Component {
+/* class Feed extends React.Component {
   render() {
     return (
       <div className="row">
@@ -30,7 +30,7 @@ class Feed extends React.Component {
       </div>
     );
   }
-}
+} */
 
 const mapStateToProps = (state) => {
   return {

@@ -77,11 +77,10 @@ export const subscribeToChanges = () => {
       .collection("posts")
       .onSnapshot((changes) => {
         changes.docChanges().forEach((change) => {
-          console.log(change);
           if (change.type === "added") {
             dispatch({
               type: "OBSERVED_POST_ADDED",
-              post: change.doc.data(),
+              post: { ...change.doc.data(), postID: change.doc.id },
             });
           }
           /* if (change.type === "removed") {
@@ -99,7 +98,7 @@ export const clearNotificationsInState = () => ({
   type: "CLEAR_NOTIFICATIONS_IN_STATE",
 });
 
-export const removeNotificationFromState = (deletedNotifTime) => ({
+export const removeNotificationFromState = (deletedNotifPostID) => ({
   type: "REMOVE_NOTIFICATION_IN_STATE",
-  deletedNotifTimestamp: deletedNotifTime,
+  deletedNotifPostID: deletedNotifPostID,
 });

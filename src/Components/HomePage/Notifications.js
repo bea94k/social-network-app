@@ -4,6 +4,7 @@ import {
   clearNotificationsInState,
   removeNotificationFromState,
 } from "../../store/actions/postActions";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
@@ -31,12 +32,16 @@ class Notifications extends React.Component {
                 <button
                   className="btn orange"
                   onClick={() =>
-                    this.props.removeNotification(notification.date.seconds)
+                    this.props.removeNotification(notification.postID)
                   }
                 >
                   X Close
                 </button>
+                <Link to={"/post/" + notification.postID}>
+                  <button className="btn green">See the post</button>
+                </Link>
                 <p>{notification.authorFirstname} has added a new post.</p>
+                <p className="ellipsis-for-long-texts">{notification.title}</p>
                 <p>
                   {moment
                     .unix(notification.date.seconds)
@@ -62,8 +67,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     subscribeToChanges: () => dispatch(subscribeToChanges()),
     clearNotifications: () => dispatch(clearNotificationsInState()),
-    removeNotification: (deletedNotifTime) =>
-      dispatch(removeNotificationFromState(deletedNotifTime)),
+    removeNotification: (deletedNotifPostID) =>
+      dispatch(removeNotificationFromState(deletedNotifPostID)),
   };
 };
 

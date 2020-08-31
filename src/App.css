@@ -1,3 +1,10 @@
 main {
   min-height: 70vh;
 }
+
+.ellipsis-for-long-texts {
+  width: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

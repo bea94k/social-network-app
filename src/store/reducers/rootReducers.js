@@ -134,7 +134,7 @@ const postReducer = (state = initialState, action) => {
 
     case "REMOVE_NOTIFICATION_IN_STATE":
       let updatedNotificationsArray = state.notifications.filter(
-        (item) => item.date.seconds !== action.deletedNotifTimestamp
+        (item) => item.postID !== action.deletedNotifPostID
       );
       return {
         ...state,
