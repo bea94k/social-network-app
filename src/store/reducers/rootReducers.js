@@ -3,6 +3,7 @@ import { firebaseReducer } from "react-redux-firebase";
 
 const initialState = {
   posts: [],
+  notifications: [],
   singlePost: {},
   userData: {},
   userLoggedIn: false,
@@ -117,6 +118,27 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [],
+      };
+
+    case "OBSERVED_POST_ADDED":
+      return {
+        ...state,
+        notifications: [...state.notifications, action.post],
+      };
+
+    case "CLEAR_NOTIFICATIONS_IN_STATE":
+      return {
+        ...state,
+        notifications: [],
+      };
+
+    case "REMOVE_NOTIFICATION_IN_STATE":
+      let updatedNotificationsArray = state.notifications.filter(
+        (item) => item.date.seconds !== action.deletedNotifTimestamp
+      );
+      return {
+        ...state,
+        notifications: updatedNotificationsArray,
       };
 
     default:

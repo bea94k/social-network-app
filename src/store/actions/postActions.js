@@ -69,3 +69,36 @@ export const deletePost = (postId) => {
 export const removePosts = () => {
   return { type: "REMOVE_ALL_POSTS" };
 };
+
+export const subscribeToChanges = () => {
+  return (dispatch, getState, storeEnhancers) => {
+    storeEnhancers
+      .getFirestore()
+      .collection("posts")
+      .onSnapshot((changes) => {
+        changes.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            dispatch({
+              type: "OBSERVED_POST_ADDED",
+              post: change.doc.data(),
+            });
+          }
+          /* if (change.type === "removed") {
+            dispatch({
+              type: "OBSERVED_POST_REMOVED",
+              post: change.doc.data(),
+            });
+          } */
+        });
+      });
+  };
+};
+
+export const clearNotificationsInState = () => ({
+  type: "CLEAR_NOTIFICATIONS_IN_STATE",
+});
+
+export const removeNotificationFromState = (deletedNotifTime) => ({
+  type: "REMOVE_NOTIFICATION_IN_STATE",
+  deletedNotifTimestamp: deletedNotifTime,
+});
